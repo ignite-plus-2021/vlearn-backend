@@ -5,6 +5,7 @@ import java.util.List;
 public class CourseResponse {
     Integer courseId;
     String courseName;
+    List<ScheduleResponse>sc_List;
 
     public List<ScheduleResponse> getSc_List() {
         return sc_List;
@@ -14,7 +15,6 @@ public class CourseResponse {
         this.sc_List = sc_List;
     }
 
-    List<ScheduleResponse>sc_List;
 
     public Integer getCourseId() {
         return courseId;

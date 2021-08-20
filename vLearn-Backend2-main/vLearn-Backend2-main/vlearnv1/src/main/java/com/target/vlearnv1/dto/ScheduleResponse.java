@@ -10,6 +10,7 @@ public class ScheduleResponse {
     Integer schedule_id;
     Date start_date;
     Date end_date;
+    List<SchCompResponse> scListComp;
 
     public List<SchCompResponse> getScListComp() {
         return scListComp;
@@ -18,8 +19,6 @@ public class ScheduleResponse {
     public void setScListComp(List<SchCompResponse> scListComp) {
         this.scListComp = scListComp;
     }
-
-    List<SchCompResponse>scListComp;
 
     public Integer getSchedule_id() {
         return schedule_id;

@@ -8,22 +8,24 @@ import com.target.vlearnv1.entity.Course;
 import com.target.vlearnv1.entity.SchCompletion;
 import com.target.vlearnv1.entity.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ResponseUtil {
 
 
-    public static List<MentorSchedulesResponse> generateResponse(List<Schedule> scList) {
-        List<MentorSchedulesResponse> msrList = new ArrayList<>();
+    public static Set<MentorSchedulesResponse> generateResponse(List<Schedule> scList) {
+        Set<MentorSchedulesResponse> msrList = new HashSet<>();
+
         for (Schedule sc : scList) {
             MentorSchedulesResponse msr = new MentorSchedulesResponse();
 
             msr.setMenteeId(sc.getMentee().getMenteeId());
             msr.setMenteeName(sc.getMentee().getMenteeName());
 
-            List<CourseResponse>courseList=new ArrayList<>();
+            List<CourseResponse> courseList=new ArrayList<>();
             courseList=generateCourseForMentee(scList,msr.getMenteeId());
             msr.setCourseList(courseList);
 

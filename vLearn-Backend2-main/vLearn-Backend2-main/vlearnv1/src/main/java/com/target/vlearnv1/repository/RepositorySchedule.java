@@ -17,9 +17,10 @@ import java.util.List;
 public interface RepositorySchedule extends JpaRepository<Schedule,Integer> {
 
     //get schedule given mentorid
-@Query(value = "SELECT * FROM mentee m FULL OUTER JOIN schedule s ON s.mentee_id=m.mentee_id WHERE s.mentor_id=:mentor",nativeQuery = true)
+@Query(value = "SELECT * FROM mentee m INNER JOIN schedule s ON s.mentee_id=m.mentee_id WHERE s.mentor_id=:mentor",nativeQuery = true)
 
    // @Query(value = "SELECT * FROM schedule s WHERE s.mentor_id=:mentor",nativeQuery = true)
-    List<Schedule> findByMentor(@Param("mentor") Mentor mentor);
+
+List<Schedule> findByMentor(@Param("mentor") Mentor mentor);
 
 }
