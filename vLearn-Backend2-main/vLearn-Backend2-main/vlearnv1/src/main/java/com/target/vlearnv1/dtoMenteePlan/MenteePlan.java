@@ -7,16 +7,15 @@ import java.util.List;
 public class MenteePlan {
     Integer menteeId;
     String  menteeName;
+    List<CourseForMenteePlan> courseList;
 
-    public List<CourseForMenteeResponse> getCourseList() {
+    public List<CourseForMenteePlan> getCourseList() {
         return courseList;
     }
 
-    public void setCourseList(List<CourseForMenteeResponse> courseList) {
+    public void setCourseList(List<CourseForMenteePlan> courseList) {
         this.courseList = courseList;
     }
-
-    List<CourseForMenteeResponse> courseList;
 
     public Integer getMenteeId() {
         return menteeId;

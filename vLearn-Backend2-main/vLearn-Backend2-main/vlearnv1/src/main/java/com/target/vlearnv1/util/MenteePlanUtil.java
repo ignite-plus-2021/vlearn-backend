@@ -21,6 +21,7 @@ public class MenteePlanUtil {
         msL.setMenteeName(scList.get(0).getMentee().getMenteeName());
         List<CourseForMenteePlan> courseList=new ArrayList<>();
         courseList=getCourseList(scList,menteeId);
+        msL.setCourseList(courseList);
         mslSet.add(msL);
         return mslSet;
     }
@@ -50,6 +51,7 @@ public class MenteePlanUtil {
         List<ModuleForMenteePlan>modList=new ArrayList<>();
         for(Schedule s:scList)
         {
+            System.out.println(s.getCourse().getCourseId());
             if(s.getCourse().getCourseId()==courseId)
             {
                 for(Module mod:s.getCourse().getModules())

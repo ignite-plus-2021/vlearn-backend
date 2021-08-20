@@ -33,7 +33,7 @@ public class VlearnController {
     }
     @GetMapping(value="/mentee/plan/{menteeid}")
     public Set<MenteePlan> getMenteeCourse(@PathVariable Integer menteeid){
-        List<Schedule> schedules=serviceSchedule.getScheduleByMentee(menteeid);
+       List<Schedule> schedules=serviceSchedule.getScheduleByMentee(menteeid);
         return MenteePlanUtil.generateResponse(schedules,menteeid);
     }
 }
