@@ -45,29 +45,29 @@ public class ResponseUtil {
                 course_obj.setCourseId(s.getCourse().getCourseId());
                 course_obj.setCourseName(s.getCourse().getCourseName());
 
-                List<ScheduleResponse>sch=generateScheduleForCourse(scList, course_obj.getCourseId());
+                List<ScheduleResponse>sch=generateScheduleForCourse(scList, course_obj.getCourseId(), mentee_id);
                 course_obj.setSc_List(sch);
                 course.add(course_obj);
             }
         }
         return course;
     }
-    public static List<ScheduleResponse> generateScheduleForCourse(List<Schedule> scList, Integer course_id)
+    public static List<ScheduleResponse> generateScheduleForCourse(List<Schedule> scList, Integer course_id, Integer mentee_id)
     {
         List<ScheduleResponse> schedule=new ArrayList<>();
         for(Schedule s:scList)
         {
-            if(s.getCourse().getCourseId()==course_id)
+            if(s.getCourse().getCourseId()==course_id && s.getMentee().getMenteeId()==mentee_id)
             {
-                ScheduleResponse obj=new ScheduleResponse();
-                obj.setSchedule_id(s.getScheduleId());
-                obj.setMentor_verification(s.getMentorVerification());
-                obj.setStart_date(s.getStartDate());
-                obj.setEnd_date(s.getEndDate());
+                    ScheduleResponse obj = new ScheduleResponse();
+                    obj.setSchedule_id(s.getScheduleId());
+                    obj.setMentor_verification(s.getMentorVerification());
+                    obj.setStart_date(s.getStartDate());
+                    obj.setEnd_date(s.getEndDate());
 
-                List<SchCompResponse> schCompResponseList=generateSchCompForSchedule(scList,s.getScheduleId());
-                obj.setScListComp(schCompResponseList);
-                schedule.add(obj);
+                    List<SchCompResponse> schCompResponseList = generateSchCompForSchedule(scList, s.getScheduleId());
+                    obj.setScListComp(schCompResponseList);
+                    schedule.add(obj);
             }
         }
         return schedule;

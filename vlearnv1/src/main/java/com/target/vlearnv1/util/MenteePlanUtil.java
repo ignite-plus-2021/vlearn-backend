@@ -8,7 +8,6 @@ import com.target.vlearnv1.entity.Module;
 import com.target.vlearnv1.entity.SchCompletion;
 import com.target.vlearnv1.entity.Schedule;
 import com.target.vlearnv1.entity.TeachingMaterial;
-import javafx.scene.effect.SepiaTone;
 
 import java.util.*;
 
@@ -62,7 +61,7 @@ public class MenteePlanUtil {
                     module.setModuleName(mod.getModuleName());
 
                     List<Integer> time=new ArrayList<>();
-                    time=getTmList(s.getSchCompletions(), mod.getTeachingMaterials());
+                    time=getTmList(s.getSchCompletions(), mod.getTeachingMaterials(), mod.getModuleId());
                     module.setDurationCompleted(time.get(0));
                     module.setDuration(time.get(1));
                     modList.add(module);
@@ -72,13 +71,14 @@ public class MenteePlanUtil {
         return modList;
     }
 
-    public static List<Integer> getTmList(List<SchCompletion> schCompList, List<TeachingMaterial>tmList)
+    public static List<Integer> getTmList(List<SchCompletion> schCompList, List<TeachingMaterial>tmList, Integer id)
     {
         List<Integer> tmTime=new ArrayList<>();
         int durationCompleted=0;
         int duration=0;
         for(SchCompletion sch:schCompList){
-            durationCompleted+=sch.getCompleted();
+            if(sch.getTeachingMaterial().getTeachingMaterialId() == id)
+            durationCompleted=sch.getCompleted();
         }
         for(TeachingMaterial tm:tmList)
         {

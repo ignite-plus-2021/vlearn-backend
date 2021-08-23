@@ -21,19 +21,24 @@ public class VlearnController {
     @Autowired
     private ServiceSchedule serviceSchedule;
 
-   @GetMapping(value = "/mentors/mymentee/{mentorid}")
+    @CrossOrigin(origins = "http://localhost:4200/")
+    @GetMapping(value = "/mentors/mymentee/{mentorid}")
     public Set<MentorSchedulesResponse> getMyMentee(@PathVariable Integer mentorid){
         List<Schedule> schedules=serviceSchedule.getMenteeScheduleByMentor(mentorid);
        return ResponseUtil.generateResponse(schedules);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping(value = "/mentee/schedule/{menteeid}")
     public Set<MenteeForMenteeProfile> getMySchedule(@PathVariable Integer menteeid){
         List<Schedule> schedules=serviceSchedule.getScheduleByMentee(menteeid);
         return MenteeProfileResponse.generateResponse(schedules,menteeid);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping(value="/mentee/plan/{menteeid}")
     public Set<MenteePlan> getMenteeCourse(@PathVariable Integer menteeid){
-       List<Schedule> schedules=serviceSchedule.getScheduleByMentee(menteeid);
+        List<Schedule> schedules=serviceSchedule.getScheduleByMentee(menteeid);
         return MenteePlanUtil.generateResponse(schedules,menteeid);
     }
 }
