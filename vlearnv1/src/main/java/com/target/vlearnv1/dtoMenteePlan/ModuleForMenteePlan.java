@@ -7,6 +7,15 @@ public class ModuleForMenteePlan {
     String moduleName;
     Integer duration;
     Integer durationCompleted;
+    String videoUrl;
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
 
     public String getModuleName() {
         return moduleName;

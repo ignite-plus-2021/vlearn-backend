@@ -57,14 +57,17 @@ public class MenteePlanUtil {
                 {
                     ModuleForMenteePlan module=new ModuleForMenteePlan();
 
-                    module.setModuleId(mod.getModuleId());
-                    module.setModuleName(mod.getModuleName());
 
-                    List<Integer> time=new ArrayList<>();
-                    time=getTmList(s.getSchCompletions(), mod.getTeachingMaterials(), mod.getModuleId());
-                    module.setDurationCompleted(time.get(0));
-                    module.setDuration(time.get(1));
-                    modList.add(module);
+                        module.setModuleId(mod.getModuleId());
+                        module.setModuleName(mod.getModuleName());
+                        String video=getVideoURL(s.getSchCompletions(), mod.getTeachingMaterials(), mod.getModuleId());
+                        module.setVideoUrl(video);
+                        List<Integer> time = new ArrayList<>();
+                        time = getTmList(s.getSchCompletions(), mod.getTeachingMaterials(), mod.getModuleId());
+                        module.setDurationCompleted(time.get(0));
+                        module.setDuration(time.get(1));
+                        modList.add(module);
+
                 }
             }
         }
@@ -74,20 +77,30 @@ public class MenteePlanUtil {
     public static List<Integer> getTmList(List<SchCompletion> schCompList, List<TeachingMaterial>tmList, Integer id)
     {
         List<Integer> tmTime=new ArrayList<>();
+
         int durationCompleted=0;
         int duration=0;
         for(SchCompletion sch:schCompList){
-            if(sch.getTeachingMaterial().getTeachingMaterialId() == id)
-            durationCompleted=sch.getCompleted();
+            if(sch.getTeachingMaterial().getTeachingMaterialId() == id) {
+                durationCompleted = sch.getCompleted();
+            }
         }
         for(TeachingMaterial tm:tmList)
         {
             duration+=tm.getDuration();
         }
-
         tmTime.add(durationCompleted);
         tmTime.add(duration);
-
         return tmTime;
+    }
+
+    public static String getVideoURL(List<SchCompletion> schCompList, List<TeachingMaterial>tmList, Integer id) {
+        String videoURL = null;
+        for (SchCompletion sch : schCompList) {
+            if(sch.getTeachingMaterial().getTeachingMaterialId() == id) {
+                videoURL = sch.getTeachingMaterial().getVideoUrl();
+            }
+        }
+        return videoURL;
     }
 }

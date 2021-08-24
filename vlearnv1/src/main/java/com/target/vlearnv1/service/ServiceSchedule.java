@@ -4,8 +4,8 @@ package com.target.vlearnv1.service;
 import com.target.vlearnv1.entity.Mentee;
 import com.target.vlearnv1.entity.Mentor;
 import com.target.vlearnv1.entity.Schedule;
-import com.target.vlearnv1.repository.RepositorySchedule;
 import com.target.vlearnv1.repository.RepoMenteeProfilePage;
+import com.target.vlearnv1.repository.RepositorySchedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,6 @@ private RepoMenteeProfilePage repoMentee;
         Mentor mentor = new Mentor();
         mentor.setMentorId(mentorid);
         List<Schedule> scList=repositorySchedule.findByMentor(mentor);
-
         return scList;
     }
     public List<Schedule> getScheduleByMentee(Integer menteeid){
