@@ -8,6 +8,7 @@ import com.target.vlearnv1.service.ServiceSchedule;
 import com.target.vlearnv1.util.MenteePlanUtil;
 import com.target.vlearnv1.util.MenteeProfileResponse;
 import com.target.vlearnv1.util.ResponseUtil;
+//import com.target.vlearnv1.util.UpdateCompletionStatusUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +41,12 @@ public class VlearnController {
     public Set<MenteePlan> getMenteeCourse(@PathVariable Integer menteeid){
         List<Schedule> schedules=serviceSchedule.getScheduleByMentee(menteeid);
         return MenteePlanUtil.generateResponse(schedules,menteeid);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200/")
+    @PutMapping(value="/mentee/video/{menteeid}/{courseid}/{moduleid}")
+    public void putVideoComplete(@PathVariable Integer menteeid,@PathVariable Integer courseid,@PathVariable Integer moduleid){
+        List<Schedule> schedules=serviceSchedule.getScheduleByMentee(menteeid);
+        serviceSchedule.updatecompletion(courseid,moduleid,schedules);
     }
 }
