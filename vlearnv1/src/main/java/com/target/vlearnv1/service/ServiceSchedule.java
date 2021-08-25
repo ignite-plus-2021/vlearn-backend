@@ -3,9 +3,11 @@ package com.target.vlearnv1.service;
 
 import com.target.vlearnv1.entity.Mentee;
 import com.target.vlearnv1.entity.Mentor;
+import com.target.vlearnv1.entity.SchCompletion;
 import com.target.vlearnv1.entity.Schedule;
 import com.target.vlearnv1.repository.RepoMenteeProfilePage;
 import com.target.vlearnv1.repository.RepositorySchedule;
+import com.target.vlearnv1.repository.UpdateProgress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ public class ServiceSchedule {
 private RepositorySchedule repositorySchedule;
 @Autowired
 private RepoMenteeProfilePage repoMentee;
+@Autowired
+private UpdateProgress updateProgress;
 
 
     public ServiceSchedule(RepositorySchedule repositorySchedule) {
@@ -36,4 +40,19 @@ private RepoMenteeProfilePage repoMentee;
         List<Schedule> scList= repoMentee.findByMentee(mentee);
         return scList;
     }
+
+    public void updatecompletion(Integer courseid, Integer moduleid, List<Schedule> schedules){
+        for(Schedule s: schedules){
+            if(s.getCourse().getCourseId()==courseid){
+                for(SchCompletion sch: s.getSchCompletions()){
+                    if(sch.getTeachingMaterial().getTeachingMaterialId()==moduleid){
+                        sch.setIsCompleted(true);
+                        sch.setCompleted(sch.getTeachingMaterial().getDuration());
+                        updateProgress.save(sch);
+                    }
+                }
+            }
+        }
+    }
+
 }
