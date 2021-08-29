@@ -5,6 +5,7 @@ import com.target.vlearnv1.entity.Mentee;
 import com.target.vlearnv1.entity.Mentor;
 import com.target.vlearnv1.entity.SchCompletion;
 import com.target.vlearnv1.entity.Schedule;
+import com.target.vlearnv1.repository.FindAllMentees;
 import com.target.vlearnv1.repository.RepoMenteeProfilePage;
 import com.target.vlearnv1.repository.RepositorySchedule;
 import com.target.vlearnv1.repository.UpdateProgress;
@@ -22,7 +23,8 @@ private RepositorySchedule repositorySchedule;
 private RepoMenteeProfilePage repoMentee;
 @Autowired
 private UpdateProgress updateProgress;
-
+@Autowired
+private FindAllMentees emailId;
 
     public ServiceSchedule(RepositorySchedule repositorySchedule) {
         this.repositorySchedule = repositorySchedule;
@@ -55,4 +57,8 @@ private UpdateProgress updateProgress;
         }
     }
 
+    public  List<Mentee> allMentee()
+    {
+        return emailId.findAll();
+    }
 }

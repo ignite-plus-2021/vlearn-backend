@@ -25,6 +25,9 @@ public class Mentor implements Serializable {
 	@Column(name="mentor_name", length=2147483647)
 	private String mentorName;
 
+	@Column(name="mentor_email", length=2147483647)
+	private String mentorEmail;
+
 	//bi-directional many-to-one association to Schedule
 	@OneToMany(mappedBy="mentor")
 	//@JsonManagedReference
@@ -69,4 +72,11 @@ public class Mentor implements Serializable {
 		return schedule;
 	}
 
+	public String getMentorEmail() {
+		return mentorEmail;
+	}
+
+	public void setMentorEmail(String mentorEmail) {
+		this.mentorEmail = mentorEmail;
+	}
 }

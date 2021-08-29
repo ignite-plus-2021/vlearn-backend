@@ -26,7 +26,17 @@ public class Mentee implements Serializable {
 	@Column(name="mentee_name", length=2147483647)
 	private String menteeName;
 
-	//bi-directional many-to-one association to Schedule
+	@Column(name="mentee_email", length=2147483647)
+	private String menteeEmail;
+
+	public String getMenteeEmail() {
+		return menteeEmail;
+	}
+
+	public void setMenteeEmail(String menteeEmail) {
+		this.menteeEmail = menteeEmail;
+	}
+//bi-directional many-to-one association to Schedule
 
 	@OneToMany(mappedBy="mentee")
 	private List<Schedule> schedules;
